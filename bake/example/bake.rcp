@@ -1,0 +1,158 @@
+// Build type
+BUILD ?= "release";
+
+// Toolchain
+CC ?= "clang.exe";
+AR ?= "llvm-ar.exe";
+LD ?= "lld-link.exe";
+
+// Common compiler flags
+CFLAGS = "";
+CFLAGS += "-std=c99";
+CFLAGS += "-Wall";
+CFLAGS += "-Wextra";
+CFLAGS += "-pedantic";
+CFLAGS += "-Wno-comment";
+CFLAGS += "-Wno-unused-parameter";
+CFLAGS += "-Wno-declaration-after-statement";
+CFLAGS += "-Wno-unused-function";
+CFLAGS += "-Wno-gnu-binary-literal";
+CFLAGS += "-Wno-c23-extensions";
+CFLAGS += "-D_POSIX_C_SOURCE=200809L";
+CFLAGS += "-I './header'";
+
+// Platform specific compiler flags
+CFLAGS += "-target x86_64-pc-windows-msvc";
+
+// Build specific compiler flags
+if (BUILD == "debug")
+{
+	CFLAGS += "-Og";
+	CFLAGS += "-g";
+	CFLAGS += "-D_DEBUG";
+	CFLAGS += "-D_HEAP_TRACE";
+}
+
+// Test
+if (BUILD == "debug")
+{
+	CFLAGS += "-Og";
+	CFLAGS += "-g";
+	CFLAGS += "-D_DEBUG";
+	CFLAGS += "-D_HEAP_TRACE";
+}
+else
+{
+	CFLAGS += "-Og";
+	CFLAGS += "-g";
+	CFLAGS += "-D_DEBUG";
+	CFLAGS += "-D_HEAP_TRACE";
+}
+
+// Test
+if (BUILD == "debug")
+{
+	CFLAGS += "-Og";
+	CFLAGS += "-g";
+	CFLAGS += "-D_DEBUG";
+	CFLAGS += "-D_HEAP_TRACE";
+}
+else if (BUILD == "release")
+{
+	
+}
+
+// Test
+if (BUILD == "debug")
+{
+	CFLAGS += "-Og";
+	CFLAGS += "-g";
+	CFLAGS += "-D_DEBUG";
+	CFLAGS += "-D_HEAP_TRACE";
+}
+else if (BUILD == "release")
+{
+
+}
+else
+{
+	CFLAGS += "-O3";
+	CFLAGS += "-march=native";
+	CFLAGS += "-fomit-frame-pointer";
+	CFLAGS += "-flto";
+}
+
+/*
+// Test
+if (BUILD == "debug")
+{
+	CFLAGS += "-Og";
+	CFLAGS += "-g";
+	CFLAGS += "-D_DEBUG";
+	CFLAGS += "-D_HEAP_TRACE";
+}
+else if (BUILD == "release")
+{
+
+}
+else if (BUILD == "release")
+{
+
+}
+else if (BUILD == "release")
+{
+
+}
+else
+{
+	CFLAGS += "-O3";
+	CFLAGS += "-march=native";
+	CFLAGS += "-fomit-frame-pointer";
+	CFLAGS += "-flto";
+}
+*/
+
+// Common linker flags
+LFLAGS = "";
+LFLAGS += "/machine:x64";
+LFLAGS += "/subsystem:console";
+
+// Common libraries
+LIB = "";
+LIB += "msvcrt.lib";
+
+// Source files
+SRC = "";
+SRC += "src/dat.c";
+SRC += "src/ecs.c";
+SRC += "src/heap.c";
+SRC += "src/map.c";
+SRC += "src/set.c";
+SRC += "src/str.c";
+SRC += "src/vec.c";
+
+program()
+{
+	printf("rule A");
+	printf("rule AA");
+	printf("rule AAA");
+	shell("echo foo");
+}
+
+test()
+{
+	printf("test");
+	shell("echo foo");
+}
+
+clean(test)
+{
+	printf("clean");
+	shell("echo foo");
+}
+
+uga(clean, test)
+{
+	printf("rule B");
+	shell("echo foo");
+}

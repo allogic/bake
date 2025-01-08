@@ -1,0 +1,8 @@
+#ifndef BAKE_CONFIG_H
+#define BAKE_CONFIG_H
+
+#ifndef LOG_FMT_BUFFER_SIZE
+	#define LOG_FMT_BUFFER_SIZE (0x1000)
+#endif // LOG_FMT_BUFFER_SIZE
+
+#endif // BAKE_CONFIG_H
