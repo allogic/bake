@@ -1,3 +1,37 @@
+"kek": () {}
+"foo": () {}
+"bar": () {}
+
+KEK0 = "kek0";
+KEK0 += "kek1";
+KEK1 ?= "kek2";
+
+if (KEK0 == "test")
+{
+	TEST = "42";
+	TEST += "42";
+	TEST += "42";
+}
+
+"test": ("kek", "foo", "bar")
+{
+	if (KEK0 == "test")
+	{
+		TEST = "42";
+		TEST += "42";
+		TEST += "42";
+	}
+	else if (TEST == "42")
+	{
+		LOL = "FUCK THIS SHIT";
+	}
+	else
+	{
+		LOL = "1337";
+	}
+}
+
+/*
 // Build type
 BUILD ?= "release";
 
@@ -82,7 +116,6 @@ else
 	CFLAGS += "-flto";
 }
 
-/*
 // Test
 if (BUILD == "debug")
 {
@@ -110,7 +143,6 @@ else
 	CFLAGS += "-fomit-frame-pointer";
 	CFLAGS += "-flto";
 }
-*/
 
 // Common linker flags
 LFLAGS = "";
@@ -156,3 +188,4 @@ uga(clean, test)
 	printf("rule B");
 	shell("echo foo");
 }
+*/

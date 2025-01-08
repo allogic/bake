@@ -2,23 +2,17 @@
 #include "core_map.h"
 
 #include "bake_ctx.h"
-#include "bake_log.h"
 
 typedef struct _scope_t
 {
 	set_t idents;
 } scope_t;
 
-static map_t s_vars;
+static map_t s_vars; // TODO: unused..
 static vec_t s_scopes;
 static vec_t s_exprs;
 static vec_t s_expr_stack;
 static vec_t s_elif_stack;
-
-static void ctx_print_vars(void* key, uint64_t key_size, void* value, uint64_t value_size)
-{
-	log_printf("%s -> %s\n", (char const*)key, (char const*)value);
-}
 
 void ctx_push_exprs(void)
 {
@@ -79,6 +73,7 @@ void ctx_push_global(expr_t expr)
 }
 str_t ctx_insert_ident(str_t ident)
 {
+	// TODO: check all idents up till root scope..
 	scope_t* scope = (scope_t*)vec_back(&s_scopes);
 	if (set_contains(&scope->idents, str_buffer(&ident), str_size(&ident)))
 	{
@@ -126,7 +121,7 @@ str_t* ctx_get_var(str_t ident)
 {
 	return map_at(&s_vars, str_buffer(&ident), str_size(&ident));
 }
-void ctx_build(char const* target_name)
+void ctx_build(char const* rule_name)
 {
 	//uint64_t expr_index = 0;
 	//uint64_t expr_count = vec_count(&s_exprs);
@@ -143,7 +138,7 @@ void ctx_print(void)
 	uint64_t expr_count = vec_count(&s_exprs);
 	while (expr_index < expr_count)
 	{
-		expr_t* expr = (expr_t*)vec_at(&s_exprs, expr_index);
+		expr_t expr = *(expr_t*)vec_at(&s_exprs, expr_index);
 		expr_print(expr, 0, 2, 1, expr_index == 0, expr_index == (expr_count - 1));
 		expr_index++;
 	}
@@ -154,7 +149,7 @@ void ctx_free(void)
 	uint64_t expr_count = vec_count(&s_exprs);
 	while (expr_index < expr_count)
 	{
-		expr_t* expr = (expr_t*)vec_at(&s_exprs, expr_index);
+		expr_t expr = *(expr_t*)vec_at(&s_exprs, expr_index);
 		expr_free(expr);
 		expr_index++;
 	}

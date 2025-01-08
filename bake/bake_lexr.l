@@ -3,6 +3,8 @@
 %{
 #include "bake_pasr.h"
 
+// TODO: first column and line numbers..
+
 #ifndef UPDATE_CURSOR_LOCATION_SINGLE_LINE
 	#define UPDATE_CURSOR_LOCATION_SINGLE_LINE() \
 		yylloc.first_line = g_line_number; \
@@ -106,7 +108,7 @@
 
 "=" {
 	UPDATE_CURSOR_LOCATION_SINGLE_LINE();
-	return EQUALS;
+	return EQ;
 }
 
 "+=" {
@@ -167,7 +169,11 @@
 	UPDATE_CURSOR_LOCATION_NEW_LINE();
 }
 
-[\t ] {
+"\t" {
+	UPDATE_CURSOR_LOCATION_SINGLE_LINE();
+}
+
+" " {
 	UPDATE_CURSOR_LOCATION_SINGLE_LINE();
 }
 
@@ -199,13 +205,13 @@
 
 [a-zA-Z_][a-zA-Z0-9_]* {
 	UPDATE_CURSOR_LOCATION_SINGLE_LINE();
-	yylval.string = str_from(yytext);
+	yylval.string = str_from(yytext, yyleng);
 	return IDENT;
 }
 
 "\""[^"]*"\"" {
 	UPDATE_CURSOR_LOCATION_SINGLE_LINE();
-	yylval.string = str_from(yytext);
+	yylval.string = str_from(yytext + 1, yyleng - 2);
 	return STRING;
 }
 

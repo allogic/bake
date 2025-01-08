@@ -45,7 +45,7 @@
 extern int yydebug;
 #endif
 /* "%code requires" blocks.  */
-#line 7 "./bake_pasr.y"
+#line 9 "./bake_pasr.y"
 
 #ifdef _WIN32
 	#define fileno _fileno
@@ -62,7 +62,6 @@ extern int yydebug;
 
 	#include "bake_ctx.h"
 	#include "bake_expr.h"
-	#include "bake_log.h"
 
 	extern int32_t yyerror(char const* msg, ...);
 	extern int32_t yywrap(void);
@@ -73,7 +72,7 @@ extern int yydebug;
 	extern int32_t g_column_number;
 	extern int32_t yyleng;
 
-#line 77 "./header/bake_pasr.h"
+#line 76 "./header/bake_pasr.h"
 
 /* Token kinds.  */
 #ifndef YYTOKENTYPE
@@ -95,7 +94,7 @@ extern int yydebug;
     IDENT = 266,                   /* IDENT  */
     STRING = 267,                  /* STRING  */
     COMMA = 268,                   /* COMMA  */
-    EQUALS = 269,                  /* EQUALS  */
+    EQ = 269,                      /* EQ  */
     PEQ = 270,                     /* PEQ  */
     MEQ = 271,                     /* MEQ  */
     QEQ = 272,                     /* QEQ  */
@@ -105,8 +104,7 @@ extern int yydebug;
     LPAREN = 276,                  /* LPAREN  */
     RPAREN = 277,                  /* RPAREN  */
     LBRACE = 278,                  /* LBRACE  */
-    RBRACE = 279,                  /* RBRACE  */
-    IFX = 280                      /* IFX  */
+    RBRACE = 279                   /* RBRACE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -115,12 +113,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 59 "./bake_pasr.y"
+#line 46 "./bake_pasr.y"
 
 	str_t string;
 	expr_t expr;
 
-#line 124 "./header/bake_pasr.h"
+#line 122 "./header/bake_pasr.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

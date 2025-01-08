@@ -1,9 +1,6 @@
 #include <stdarg.h>
 
-#include "bake_log.h"
 #include "bake_expr.h"
-
-// TODO: free vec_t's from push_range..
 
 expr_t expr_none(void)
 {
@@ -39,14 +36,14 @@ expr_t expr_packv(vec_t exprs)
 	e.exprs = exprs;
 	return e;
 }
-expr_t expr_target(expr_t ident, expr_t depend, expr_t scope)
+expr_t expr_rule(expr_t pattern, expr_t depend, expr_t scope)
 {
 	expr_t e;
 	memset(&e, 0, sizeof(expr_t));
-	e.type = EXPR_TYPE_TARGET;
+	e.type = EXPR_TYPE_RULE;
 	e.alloc = EXPR_ALLOC_EXPRS;
 	e.exprs = vec_alloc(sizeof(expr_t));
-	vec_push(&e.exprs, &ident);
+	vec_push(&e.exprs, &pattern);
 	vec_push(&e.exprs, &depend);
 	vec_push(&e.exprs, &scope);
 	return e;
@@ -173,26 +170,6 @@ expr_t expr_if_else_block(expr_t pack)
 	vec_push(&e.exprs, &pack);
 	return e;
 }
-expr_t expr_if_elif_block(expr_t pack)
-{
-	expr_t e;
-	memset(&e, 0, sizeof(expr_t));
-	e.type = EXPR_TYPE_IF_ELIF_BLOCK;
-	e.alloc = EXPR_ALLOC_EXPRS;
-	e.exprs = vec_alloc(sizeof(expr_t));
-	vec_push(&e.exprs, &pack);
-	return e;
-}
-expr_t expr_if_elif_else_block(expr_t pack)
-{
-	expr_t e;
-	memset(&e, 0, sizeof(expr_t));
-	e.type = EXPR_TYPE_IF_ELIF_ELSE_BLOCK;
-	e.alloc = EXPR_ALLOC_EXPRS;
-	e.exprs = vec_alloc(sizeof(expr_t));
-	vec_push(&e.exprs, &pack);
-	return e;
-}
 expr_t expr_mkdir(expr_t expr)
 {
 	expr_t e;
@@ -253,7 +230,7 @@ expr_t expr_shell(expr_t expr)
 	vec_push(&e.exprs, &expr);
 	return e;
 }
-void expr_build(expr_t* expr)
+void expr_build(expr_t expr)
 {
 	/*
 	switch (expr->type)
@@ -417,75 +394,73 @@ void expr_build(expr_t* expr)
 	}
 	*/
 }
-void expr_print(expr_t* expr, uint64_t indent_count, uint64_t indent_increment, uint8_t is_global, uint8_t is_first, uint8_t is_last)
+void expr_print(expr_t expr, uint64_t indent_count, uint64_t indent_increment, uint8_t is_global, uint8_t is_first, uint8_t is_last)
 {
 	uint64_t indent_index = 0;
 	while (indent_index < indent_count)
 	{
-		log_printf(" ");
+		printf(" ");
 		indent_index++;
 	}
-	switch (expr->type)
+	switch (expr.type)
 	{
-		case EXPR_TYPE_NONE: log_printf("none\n"); break;
-		case EXPR_TYPE_PACK: log_printf("pack\n"); break;
-		case EXPR_TYPE_TARGET: log_printf("target\n"); break;
-		case EXPR_TYPE_CALL: log_printf("call\n"); break;
-		case EXPR_TYPE_VAR: log_printf("var\n"); break;
-		case EXPR_TYPE_IF: log_printf("if\n"); break;
-		case EXPR_TYPE_COPY: log_printf("copy\n"); break;
-		case EXPR_TYPE_COPY_ADD: log_printf("copy_add\n"); break;
-		case EXPR_TYPE_COPY_IF: log_printf("copy_if\n"); break;
-		case EXPR_TYPE_IDENT: log_printf("ident %s\n", str_buffer(&expr->ident)); break;
-		case EXPR_TYPE_STRING: log_printf("string %s\n", str_buffer(&expr->string)); break;
-		case EXPR_TYPE_COND: log_printf("cond\n"); break;
-		case EXPR_TYPE_COMP: log_printf("comp\n"); break;
-		case EXPR_TYPE_IF_BLOCK: log_printf("if_block\n"); break;
-		case EXPR_TYPE_IF_ELSE_BLOCK: log_printf("if_else_block\n"); break;
-		case EXPR_TYPE_IF_ELIF_BLOCK: log_printf("if_elif_block\n"); break;
-		case EXPR_TYPE_IF_ELIF_ELSE_BLOCK: log_printf("if_elif_else_block\n"); break;
-		case EXPR_TYPE_MKDIR: log_printf("mkdir\n"); break;
-		case EXPR_TYPE_MKFILE: log_printf("mkfile\n"); break;
-		case EXPR_TYPE_RMDIR: log_printf("rmdir\n"); break;
-		case EXPR_TYPE_RMFILE: log_printf("rmfile\n"); break;
-		case EXPR_TYPE_PRINTF: log_printf("printf\n"); break;
-		case EXPR_TYPE_SHELL: log_printf("shell\n"); break;
+		case EXPR_TYPE_NONE: printf("none\n"); break;
+		case EXPR_TYPE_PACK: printf("pack\n"); break;
+		case EXPR_TYPE_RULE: printf("rule\n"); break;
+		case EXPR_TYPE_CALL: printf("call\n"); break;
+		case EXPR_TYPE_VAR: printf("var\n"); break;
+		case EXPR_TYPE_IF: printf("if\n"); break;
+		case EXPR_TYPE_COPY: printf("copy\n"); break;
+		case EXPR_TYPE_COPY_ADD: printf("copy_add\n"); break;
+		case EXPR_TYPE_COPY_IF: printf("copy_if\n"); break;
+		case EXPR_TYPE_IDENT: printf("ident %s\n", str_buffer(&expr.ident)); break;
+		case EXPR_TYPE_STRING: printf("string %s\n", str_buffer(&expr.string)); break;
+		case EXPR_TYPE_COND: printf("cond\n"); break;
+		case EXPR_TYPE_COMP: printf("comp\n"); break;
+		case EXPR_TYPE_IF_BLOCK: printf("if_block\n"); break;
+		case EXPR_TYPE_IF_ELSE_BLOCK: printf("if_else_block\n"); break;
+		case EXPR_TYPE_MKDIR: printf("mkdir\n"); break;
+		case EXPR_TYPE_MKFILE: printf("mkfile\n"); break;
+		case EXPR_TYPE_RMDIR: printf("rmdir\n"); break;
+		case EXPR_TYPE_RMFILE: printf("rmfile\n"); break;
+		case EXPR_TYPE_PRINTF: printf("printf\n"); break;
+		case EXPR_TYPE_SHELL: printf("shell\n"); break;
 		default: break;
 	}
 	uint64_t expr_index = 0;
-	uint64_t expr_count = vec_count(&expr->exprs);
+	uint64_t expr_count = vec_count(&expr.exprs);
 	while (expr_index < expr_count)
 	{
-		expr_t* sub_expr = (expr_t*)vec_at(&expr->exprs, expr_index);
+		expr_t sub_expr = *(expr_t*)vec_at(&expr.exprs, expr_index);
 		expr_print(sub_expr, indent_count + indent_increment, indent_increment, 0, expr_index == 0, expr_index == (expr_count - 1));
 		expr_index++;
 	}
 	if (is_global && (is_last == 0))
 	{
-		log_printf("\n");
+		printf("\n");
 	}
 }
-void expr_free(expr_t* expr)
+void expr_free(expr_t expr)
 {
-	if (expr->alloc & EXPR_ALLOC_IDENT)
+	if (expr.alloc & EXPR_ALLOC_IDENT)
 	{
-		str_free(&expr->ident);
+		str_free(&expr.ident);
 	}
-	if (expr->alloc & EXPR_ALLOC_STRING)
+	if (expr.alloc & EXPR_ALLOC_STRING)
 	{
-		str_free(&expr->string);
+		str_free(&expr.string);
 	}
-	if (expr->alloc & EXPR_ALLOC_EXPRS)
+	if (expr.alloc & EXPR_ALLOC_EXPRS)
 	{
 		uint64_t expr_index = 0;
-		uint64_t expr_count = vec_count(&expr->exprs);
+		uint64_t expr_count = vec_count(&expr.exprs);
 		while (expr_index < expr_count)
 		{
-			expr_t* sub_expr = (expr_t*)vec_at(&expr->exprs, expr_index);
+			expr_t sub_expr = *(expr_t*)vec_at(&expr.exprs, expr_index);
 			expr_free(sub_expr);
 			expr_index++;
 		}
-		vec_free(&expr->exprs);
+		vec_free(&expr.exprs);
 	}
-	memset(expr, 0, sizeof(expr_t));
+	memset(&expr, 0, sizeof(expr_t));
 }

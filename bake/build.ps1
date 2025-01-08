@@ -5,7 +5,6 @@ $SOURCES = @()
 $SOURCES += ".\src\bake_ctx.c"
 $SOURCES += ".\src\bake_expr.c"
 $SOURCES += ".\src\bake_lexr.c"
-$SOURCES += ".\src\bake_log.c"
 $SOURCES += ".\src\bake_pasr.c"
 $SOURCES += "..\core\core\src\core_heap.c"
 $SOURCES += "..\core\core\src\core_map.c"

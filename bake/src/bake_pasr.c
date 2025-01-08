@@ -107,7 +107,7 @@ enum yysymbol_kind_t
   YYSYMBOL_IDENT = 11,                     /* IDENT  */
   YYSYMBOL_STRING = 12,                    /* STRING  */
   YYSYMBOL_COMMA = 13,                     /* COMMA  */
-  YYSYMBOL_EQUALS = 14,                    /* EQUALS  */
+  YYSYMBOL_EQ = 14,                        /* EQ  */
   YYSYMBOL_PEQ = 15,                       /* PEQ  */
   YYSYMBOL_MEQ = 16,                       /* MEQ  */
   YYSYMBOL_QEQ = 17,                       /* QEQ  */
@@ -118,27 +118,25 @@ enum yysymbol_kind_t
   YYSYMBOL_RPAREN = 22,                    /* RPAREN  */
   YYSYMBOL_LBRACE = 23,                    /* LBRACE  */
   YYSYMBOL_RBRACE = 24,                    /* RBRACE  */
-  YYSYMBOL_IFX = 25,                       /* IFX  */
-  YYSYMBOL_YYACCEPT = 26,                  /* $accept  */
-  YYSYMBOL_PROGRAM = 27,                   /* PROGRAM  */
-  YYSYMBOL_TARGET = 28,                    /* TARGET  */
-  YYSYMBOL_RULE = 29,                      /* RULE  */
-  YYSYMBOL_DEPEND_LIST_BEGIN = 30,         /* DEPEND_LIST_BEGIN  */
-  YYSYMBOL_31_1 = 31,                      /* $@1  */
-  YYSYMBOL_DEPEND_LIST = 32,               /* DEPEND_LIST  */
-  YYSYMBOL_DEPEND = 33,                    /* DEPEND  */
-  YYSYMBOL_STMT_LIST_BEGIN = 34,           /* STMT_LIST_BEGIN  */
-  YYSYMBOL_35_2 = 35,                      /* $@2  */
-  YYSYMBOL_STMT_LIST = 36,                 /* STMT_LIST  */
-  YYSYMBOL_STMT = 37,                      /* STMT  */
+  YYSYMBOL_YYACCEPT = 25,                  /* $accept  */
+  YYSYMBOL_PROGRAM = 26,                   /* PROGRAM  */
+  YYSYMBOL_RULE_DECL = 27,                 /* RULE_DECL  */
+  YYSYMBOL_DEPEND_PACK = 28,               /* DEPEND_PACK  */
+  YYSYMBOL_29_1 = 29,                      /* $@1  */
+  YYSYMBOL_DEPEND_LIST = 30,               /* DEPEND_LIST  */
+  YYSYMBOL_STMT_OR_SCOPE = 31,             /* STMT_OR_SCOPE  */
+  YYSYMBOL_STMT_PACK = 32,                 /* STMT_PACK  */
+  YYSYMBOL_33_2 = 33,                      /* $@2  */
+  YYSYMBOL_STMT_LIST = 34,                 /* STMT_LIST  */
+  YYSYMBOL_STMT = 35,                      /* STMT  */
+  YYSYMBOL_SCOPE = 36,                     /* SCOPE  */
+  YYSYMBOL_37_3 = 37,                      /* $@3  */
   YYSYMBOL_IF_STMT = 38,                   /* IF_STMT  */
-  YYSYMBOL_ELIF_LIST = 39,                 /* ELIF_LIST  */
-  YYSYMBOL_40_3 = 40,                      /* $@3  */
-  YYSYMBOL_VAR_STMT = 41,                  /* VAR_STMT  */
-  YYSYMBOL_CALL_STMT = 42,                 /* CALL_STMT  */
-  YYSYMBOL_EXPR = 43,                      /* EXPR  */
-  YYSYMBOL_CONDITION = 44,                 /* CONDITION  */
-  YYSYMBOL_COMPARISON = 45                 /* COMPARISON  */
+  YYSYMBOL_VAR_DECL = 39,                  /* VAR_DECL  */
+  YYSYMBOL_CALL_DECL = 40,                 /* CALL_DECL  */
+  YYSYMBOL_EXPR = 41,                      /* EXPR  */
+  YYSYMBOL_COND = 42,                      /* COND  */
+  YYSYMBOL_COMP = 43                       /* COMP  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -475,19 +473,19 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   101
+#define YYLAST   88
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  26
+#define YYNTOKENS  25
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  20
+#define YYNNTS  19
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  40
+#define YYNRULES  36
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  109
+#define YYNSTATES  81
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   280
+#define YYMAXUTOK   279
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -528,19 +526,17 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25
+      15,    16,    17,    18,    19,    20,    21,    22,    23,    24
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    81,    81,    82,    83,    84,    88,    98,   105,   105,
-     109,   110,   111,   115,   119,   119,   123,   124,   128,   129,
-     130,   136,   142,   149,   156,   168,   168,   174,   183,   184,
-     185,   189,   190,   191,   192,   193,   194,   198,   199,   203,
-     207
+       0,    59,    59,    60,    61,    65,    72,    72,    76,    77,
+      78,    82,    83,    87,    87,    91,    92,    96,    97,    98,
+     102,   102,   106,   110,   117,   118,   119,   123,   124,   125,
+     126,   127,   128,   132,   133,   137,   141
 };
 #endif
 
@@ -558,11 +554,11 @@ static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "MKDIR", "MKFILE",
   "RMDIR", "RMFILE", "PRINTF", "SHELL", "IF", "ELSE", "IDENT", "STRING",
-  "COMMA", "EQUALS", "PEQ", "MEQ", "QEQ", "EQEQ", "COLON", "SEMICOLON",
-  "LPAREN", "RPAREN", "LBRACE", "RBRACE", "IFX", "$accept", "PROGRAM",
-  "TARGET", "RULE", "DEPEND_LIST_BEGIN", "$@1", "DEPEND_LIST", "DEPEND",
-  "STMT_LIST_BEGIN", "$@2", "STMT_LIST", "STMT", "IF_STMT", "ELIF_LIST",
-  "$@3", "VAR_STMT", "CALL_STMT", "EXPR", "CONDITION", "COMPARISON", YY_NULLPTR
+  "COMMA", "EQ", "PEQ", "MEQ", "QEQ", "EQEQ", "COLON", "SEMICOLON",
+  "LPAREN", "RPAREN", "LBRACE", "RBRACE", "$accept", "PROGRAM",
+  "RULE_DECL", "DEPEND_PACK", "$@1", "DEPEND_LIST", "STMT_OR_SCOPE",
+  "STMT_PACK", "$@2", "STMT_LIST", "STMT", "SCOPE", "$@3", "IF_STMT",
+  "VAR_DECL", "CALL_DECL", "EXPR", "COND", "COMP", YY_NULLPTR
 };
 
 static const char *
@@ -572,12 +568,12 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-80)
+#define YYPACT_NINF (-32)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-26)
+#define YYTABLE_NINF (-21)
 
 #define yytable_value_is_error(Yyn) \
   0
@@ -586,17 +582,15 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -80,    25,   -80,    -4,    -2,     3,    17,    21,    31,    33,
-       1,    34,   -80,   -80,   -80,   -80,   -80,   -80,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,    44,   -80,   -80,
-     -80,   -80,    35,    36,    37,    38,    39,    40,    45,    43,
-     -80,    46,    47,    48,    49,    53,    50,    54,    55,    56,
-      57,    58,    59,     2,    60,   -80,   -80,   -80,    61,   -80,
-     -80,    67,    62,   -80,   -80,   -80,   -80,   -80,   -80,   -80,
-     -80,   -80,    53,   -80,    63,   -80,    64,   -80,    65,    71,
-      42,   -80,   -80,    -3,     0,    26,   -80,    52,   -80,   -80,
-      72,     2,    66,    68,    77,    69,   -80,   -80,    73,    70,
-       2,   -80,    74,    75,    78,   -80,   -80,    76,   -80
+     -32,    15,   -32,    -4,     4,    10,    23,    25,    27,    29,
+      28,    32,   -32,   -32,   -32,   -32,   -32,    18,    18,    18,
+      18,    18,    18,    18,    18,    18,    37,   -32,   -32,   -32,
+      31,    33,    34,    35,    36,    38,    41,    39,   -32,    42,
+      43,    44,   -32,    45,    47,    48,    49,    50,    51,    52,
+      18,    30,   -32,   -32,   -32,   -32,    53,    40,   -32,   -32,
+     -32,   -32,   -32,   -32,   -32,    55,   -32,   -32,   -32,    60,
+      56,    30,    57,   -32,    40,   -32,   -32,   -32,     5,   -32,
+     -32
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -604,31 +598,29 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       5,     0,     1,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     3,     4,     2,    20,    19,    18,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     8,     8,
-      37,    38,     0,     0,     0,     0,     0,     0,     0,     0,
-      39,     0,     0,     0,     0,    12,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    28,    29,    30,     0,    13,
-       9,    11,     0,    31,    32,    33,    34,    35,    36,    40,
-      14,    14,    12,    14,     0,    17,     0,    10,     0,    21,
-      15,     6,     7,     0,    23,     0,    16,     0,    14,    14,
-       0,     0,     0,     0,     0,     0,    22,    24,     0,     0,
-       0,    14,     0,     0,     0,    27,    14,     0,    26
+       4,     0,     1,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     2,     3,    17,    18,    19,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     6,    33,    34,
+       0,     0,     0,     0,     0,     0,     0,     0,    35,     0,
+       0,     0,    20,     0,     0,     0,     0,     0,     0,     0,
+       0,    20,    24,    25,    26,     5,     0,    10,    27,    28,
+      29,    30,    31,    32,    36,    23,    11,    12,    13,     9,
+       0,    20,     0,    16,    10,     7,    22,    21,    14,     8,
+      15
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -80,   -80,   -80,   -80,    41,   -80,    23,   -80,   -62,   -80,
-     -80,   -11,   -80,   -80,   -80,   -80,   -80,   -18,   -79,   -80
+     -32,   -32,   -32,   -32,   -32,   -20,   -31,   -32,   -32,   -32,
+      73,    46,   -32,   -32,   -32,   -32,   -18,   -32,   -32
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     1,    12,    13,    44,    45,    60,    61,    74,    75,
-      80,    14,    15,    84,    90,    16,    17,    38,    39,    40
+       0,     1,    12,    42,    43,    70,    65,    72,    73,    78,
+      66,    67,    56,    14,    15,    16,    30,    37,    38
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -636,69 +628,61 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      32,    33,    34,    35,    36,    37,    87,    41,    42,    76,
-     -25,    78,    95,    30,    31,    25,    26,    18,    27,    19,
-      88,   102,    28,    89,    20,     2,    92,    93,     3,     4,
-       5,     6,     7,     8,     9,    69,    10,    11,    21,   103,
-      25,    26,    22,    27,   107,     3,     4,     5,     6,     7,
-       8,     9,    23,    85,    24,    29,    43,    47,    48,    49,
-      50,    51,    52,    53,    59,    54,    55,    56,    57,    86,
-      46,    58,    62,    91,    63,    64,    65,    66,    67,    68,
-      72,    83,    94,    70,    71,    73,    98,    79,    81,    82,
-      96,    99,    97,   101,   100,    77,   104,     0,     0,   105,
-     108,   106
+      31,    32,    33,    34,    35,    36,    39,    40,     3,     4,
+       5,     6,     7,     8,     9,     2,    10,    17,     3,     4,
+       5,     6,     7,     8,     9,    18,    10,    11,   -20,    28,
+      29,    19,    64,     3,     4,     5,     6,     7,     8,     9,
+      76,    10,    24,    25,    20,    26,    21,    80,    22,    41,
+      23,    27,    69,    44,    79,    45,    46,    47,    48,    50,
+      49,    51,    52,    53,    54,    71,    57,    58,    59,    60,
+      61,    62,    63,    74,    13,     0,    68,     0,    75,     0,
+       0,    77,     0,     0,     0,     0,     0,     0,    55
 };
 
 static const yytype_int8 yycheck[] =
 {
-      18,    19,    20,    21,    22,    23,     9,    25,    26,    71,
-      10,    73,    91,    11,    12,    14,    15,    21,    17,    21,
-      23,   100,    21,    23,    21,     0,    88,    89,     3,     4,
-       5,     6,     7,     8,     9,    53,    11,    12,    21,   101,
-      14,    15,    21,    17,   106,     3,     4,     5,     6,     7,
-       8,     9,    21,    11,    21,    21,    12,    22,    22,    22,
-      22,    22,    22,    18,    11,    22,    20,    20,    20,    80,
-      29,    22,    22,    21,    20,    20,    20,    20,    20,    20,
-      13,    10,    10,    23,    23,    23,     9,    24,    24,    24,
-      24,    22,    24,    23,    21,    72,    22,    -1,    -1,    24,
-      24,    23
+      18,    19,    20,    21,    22,    23,    24,    25,     3,     4,
+       5,     6,     7,     8,     9,     0,    11,    21,     3,     4,
+       5,     6,     7,     8,     9,    21,    11,    12,    23,    11,
+      12,    21,    50,     3,     4,     5,     6,     7,     8,     9,
+      71,    11,    14,    15,    21,    17,    21,    78,    21,    12,
+      21,    19,    12,    22,    74,    22,    22,    22,    22,    18,
+      22,    22,    20,    20,    20,    10,    21,    20,    20,    20,
+      20,    20,    20,    13,     1,    -1,    23,    -1,    22,    -1,
+      -1,    24,    -1,    -1,    -1,    -1,    -1,    -1,    42
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    27,     0,     3,     4,     5,     6,     7,     8,     9,
-      11,    12,    28,    29,    37,    38,    41,    42,    21,    21,
-      21,    21,    21,    21,    21,    14,    15,    17,    21,    21,
-      11,    12,    43,    43,    43,    43,    43,    43,    43,    44,
-      45,    43,    43,    12,    30,    31,    30,    22,    22,    22,
-      22,    22,    22,    18,    22,    20,    20,    20,    22,    11,
-      32,    33,    22,    20,    20,    20,    20,    20,    20,    43,
-      23,    23,    13,    23,    34,    35,    34,    32,    34,    24,
-      36,    24,    24,    10,    39,    11,    37,     9,    23,    23,
-      40,    21,    34,    34,    10,    44,    24,    24,     9,    22,
-      21,    23,    44,    34,    22,    24,    23,    34,    24
+       0,    26,     0,     3,     4,     5,     6,     7,     8,     9,
+      11,    12,    27,    35,    38,    39,    40,    21,    21,    21,
+      21,    21,    21,    21,    14,    15,    17,    19,    11,    12,
+      41,    41,    41,    41,    41,    41,    41,    42,    43,    41,
+      41,    12,    28,    29,    22,    22,    22,    22,    22,    22,
+      18,    22,    20,    20,    20,    36,    37,    21,    20,    20,
+      20,    20,    20,    20,    41,    31,    35,    36,    23,    12,
+      30,    10,    32,    33,    13,    22,    31,    24,    34,    30,
+      31
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    26,    27,    27,    27,    27,    28,    29,    31,    30,
-      32,    32,    32,    33,    35,    34,    36,    36,    37,    37,
-      37,    38,    38,    38,    38,    40,    39,    39,    41,    41,
-      41,    42,    42,    42,    42,    42,    42,    43,    43,    44,
-      45
+       0,    25,    26,    26,    26,    27,    29,    28,    30,    30,
+      30,    31,    31,    33,    32,    34,    34,    35,    35,    35,
+      37,    36,    38,    38,    39,    39,    39,    40,    40,    40,
+      40,    40,    40,    41,    41,    42,    43
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     2,     2,     2,     0,     7,     7,     0,     2,
-       3,     1,     0,     1,     0,     2,     2,     0,     1,     1,
-       1,     7,    11,     8,    11,     0,    10,     8,     4,     4,
-       4,     5,     5,     5,     5,     5,     5,     1,     1,     1,
-       3
+       0,     2,     2,     2,     0,     4,     0,     4,     3,     1,
+       0,     1,     1,     0,     2,     2,     0,     1,     1,     1,
+       0,     4,     7,     5,     4,     4,     4,     5,     5,     5,
+       5,     5,     5,     1,     1,     1,     3
 };
 
 
@@ -1545,247 +1529,200 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2: /* PROGRAM: PROGRAM STMT  */
-#line 81 "./bake_pasr.y"
+  case 2: /* PROGRAM: PROGRAM RULE_DECL  */
+#line 59 "./bake_pasr.y"
+                            { ctx_push_global((yyvsp[0].expr)); }
+#line 1536 "./src/bake_pasr.c"
+    break;
+
+  case 3: /* PROGRAM: PROGRAM STMT  */
+#line 60 "./bake_pasr.y"
                        { ctx_push_global((yyvsp[0].expr)); }
-#line 1552 "./src/bake_pasr.c"
+#line 1542 "./src/bake_pasr.c"
     break;
 
-  case 3: /* PROGRAM: PROGRAM TARGET  */
+  case 5: /* RULE_DECL: STRING COLON DEPEND_PACK SCOPE  */
+#line 66 "./bake_pasr.y"
+                {
+			(yyval.expr) = expr_rule(expr_string((yyvsp[-3].string)), (yyvsp[-1].expr), (yyvsp[0].expr)); // TODO: add to rules.. (compare depends for ident)
+		}
+#line 1550 "./src/bake_pasr.c"
+    break;
+
+  case 6: /* $@1: %empty  */
+#line 72 "./bake_pasr.y"
+          { ctx_push_exprs(); }
+#line 1556 "./src/bake_pasr.c"
+    break;
+
+  case 7: /* DEPEND_PACK: $@1 LPAREN DEPEND_LIST RPAREN  */
+#line 72 "./bake_pasr.y"
+                                                          { (yyval.expr) = expr_packv(ctx_pop_exprs()); }
+#line 1562 "./src/bake_pasr.c"
+    break;
+
+  case 8: /* DEPEND_LIST: STRING COMMA DEPEND_LIST  */
+#line 76 "./bake_pasr.y"
+                                   { ctx_push_expr(expr_string((yyvsp[-2].string))); }
+#line 1568 "./src/bake_pasr.c"
+    break;
+
+  case 9: /* DEPEND_LIST: STRING  */
+#line 77 "./bake_pasr.y"
+                 { ctx_push_expr(expr_string((yyvsp[0].string))); }
+#line 1574 "./src/bake_pasr.c"
+    break;
+
+  case 11: /* STMT_OR_SCOPE: STMT  */
 #line 82 "./bake_pasr.y"
-                         { ctx_push_global((yyvsp[0].expr)); }
-#line 1558 "./src/bake_pasr.c"
+               { ctx_push_expr((yyvsp[0].expr)); (yyval.expr) = (yyvsp[0].expr); }
+#line 1580 "./src/bake_pasr.c"
     break;
 
-  case 4: /* PROGRAM: PROGRAM RULE  */
+  case 12: /* STMT_OR_SCOPE: SCOPE  */
 #line 83 "./bake_pasr.y"
-                       { /* TODO */ }
-#line 1564 "./src/bake_pasr.c"
+                { (yyval.expr) = (yyvsp[0].expr); }
+#line 1586 "./src/bake_pasr.c"
     break;
 
-  case 6: /* TARGET: IDENT LPAREN DEPEND_LIST_BEGIN RPAREN LBRACE STMT_LIST_BEGIN RBRACE  */
-#line 89 "./bake_pasr.y"
-                {
-			expr_t ident = expr_ident(ctx_insert_ident((yyvsp[-6].string)));
-			expr_t body_pack = expr_packv(ctx_pop_exprs());
-			expr_t depend_pack = expr_packv(ctx_pop_exprs());
-			(yyval.expr) = expr_target(ident, depend_pack, body_pack);
-		}
-#line 1575 "./src/bake_pasr.c"
-    break;
-
-  case 7: /* RULE: STRING LPAREN DEPEND_LIST_BEGIN RPAREN LBRACE STMT_LIST_BEGIN RBRACE  */
-#line 99 "./bake_pasr.y"
-                {
-			// TODO
-		}
-#line 1583 "./src/bake_pasr.c"
-    break;
-
-  case 8: /* $@1: %empty  */
-#line 105 "./bake_pasr.y"
+  case 13: /* $@2: %empty  */
+#line 87 "./bake_pasr.y"
           { ctx_push_exprs(); }
-#line 1589 "./src/bake_pasr.c"
+#line 1592 "./src/bake_pasr.c"
     break;
 
-  case 10: /* DEPEND_LIST: DEPEND COMMA DEPEND_LIST  */
-#line 109 "./bake_pasr.y"
-                                   { ctx_push_expr((yyvsp[-2].expr)); }
-#line 1595 "./src/bake_pasr.c"
+  case 14: /* STMT_PACK: $@2 STMT_LIST  */
+#line 87 "./bake_pasr.y"
+                                          { (yyval.expr) = expr_packv(ctx_pop_exprs()); }
+#line 1598 "./src/bake_pasr.c"
     break;
 
-  case 11: /* DEPEND_LIST: DEPEND  */
-#line 110 "./bake_pasr.y"
-                 { ctx_push_expr((yyvsp[0].expr)); }
-#line 1601 "./src/bake_pasr.c"
-    break;
-
-  case 13: /* DEPEND: IDENT  */
-#line 115 "./bake_pasr.y"
-                { (yyval.expr) = expr_ident(ctx_validate_ident((yyvsp[0].string))); }
-#line 1607 "./src/bake_pasr.c"
-    break;
-
-  case 14: /* $@2: %empty  */
-#line 119 "./bake_pasr.y"
-          { ctx_push_exprs(); }
-#line 1613 "./src/bake_pasr.c"
-    break;
-
-  case 16: /* STMT_LIST: STMT_LIST STMT  */
-#line 123 "./bake_pasr.y"
-                         { ctx_push_expr((yyvsp[0].expr)); }
-#line 1619 "./src/bake_pasr.c"
-    break;
-
-  case 18: /* STMT: CALL_STMT  */
-#line 128 "./bake_pasr.y"
-                    { (yyval.expr) = expr_call((yyvsp[0].expr)); }
-#line 1625 "./src/bake_pasr.c"
-    break;
-
-  case 19: /* STMT: VAR_STMT  */
-#line 129 "./bake_pasr.y"
-                   { (yyval.expr) = expr_var((yyvsp[0].expr)); }
-#line 1631 "./src/bake_pasr.c"
-    break;
-
-  case 20: /* STMT: IF_STMT  */
-#line 130 "./bake_pasr.y"
+  case 17: /* STMT: IF_STMT  */
+#line 96 "./bake_pasr.y"
                   { (yyval.expr) = expr_if((yyvsp[0].expr)); }
-#line 1637 "./src/bake_pasr.c"
+#line 1604 "./src/bake_pasr.c"
     break;
 
-  case 21: /* IF_STMT: IF LPAREN CONDITION RPAREN LBRACE STMT_LIST_BEGIN RBRACE  */
-#line 137 "./bake_pasr.y"
+  case 18: /* STMT: VAR_DECL  */
+#line 97 "./bake_pasr.y"
+                   { (yyval.expr) = expr_var((yyvsp[0].expr)); }
+#line 1610 "./src/bake_pasr.c"
+    break;
+
+  case 19: /* STMT: CALL_DECL  */
+#line 98 "./bake_pasr.y"
+                    { (yyval.expr) = expr_call((yyvsp[0].expr)); }
+#line 1616 "./src/bake_pasr.c"
+    break;
+
+  case 20: /* $@3: %empty  */
+#line 102 "./bake_pasr.y"
+          { ctx_push_scope(); }
+#line 1622 "./src/bake_pasr.c"
+    break;
+
+  case 21: /* SCOPE: $@3 LBRACE STMT_PACK RBRACE  */
+#line 102 "./bake_pasr.y"
+                                                        { ctx_pop_scope(); (yyval.expr) = (yyvsp[-1].expr); }
+#line 1628 "./src/bake_pasr.c"
+    break;
+
+  case 22: /* IF_STMT: IF LPAREN COND RPAREN STMT_OR_SCOPE ELSE STMT_OR_SCOPE  */
+#line 107 "./bake_pasr.y"
                 {
-			expr_t if_pack = expr_packv(ctx_pop_exprs());
-			expr_t pack = expr_packi(2, (yyvsp[-4].expr), if_pack);
-			(yyval.expr) = expr_if_block(pack);
+			(yyval.expr) = expr_if_else_block(expr_packi(3, (yyvsp[-4].expr), (yyvsp[-2].expr), (yyvsp[0].expr)));
 		}
-#line 1647 "./src/bake_pasr.c"
+#line 1636 "./src/bake_pasr.c"
     break;
 
-  case 22: /* IF_STMT: IF LPAREN CONDITION RPAREN LBRACE STMT_LIST_BEGIN RBRACE ELSE LBRACE STMT_LIST_BEGIN RBRACE  */
-#line 143 "./bake_pasr.y"
+  case 23: /* IF_STMT: IF LPAREN COND RPAREN STMT_OR_SCOPE  */
+#line 111 "./bake_pasr.y"
                 {
-			expr_t else_pack = expr_packv(ctx_pop_exprs());
-			expr_t if_pack = expr_packv(ctx_pop_exprs());
-			expr_t pack = expr_packi(3, (yyvsp[-8].expr), if_pack, else_pack);
-			(yyval.expr) = expr_if_else_block(pack);
+			(yyval.expr) = expr_if_block(expr_packi(2, (yyvsp[-2].expr), (yyvsp[0].expr)));
 		}
-#line 1658 "./src/bake_pasr.c"
+#line 1644 "./src/bake_pasr.c"
     break;
 
-  case 23: /* IF_STMT: IF LPAREN CONDITION RPAREN LBRACE STMT_LIST_BEGIN RBRACE ELIF_LIST  */
-#line 150 "./bake_pasr.y"
-                {
-			expr_t elif_pack = expr_packv(ctx_pop_elifs());
-			expr_t if_pack = expr_packv(ctx_pop_exprs());
-			expr_t pack = expr_packi(3, (yyvsp[-5].expr), if_pack, elif_pack);
-			(yyval.expr) = expr_if_elif_block(pack);
-		}
-#line 1669 "./src/bake_pasr.c"
+  case 24: /* VAR_DECL: IDENT EQ EXPR SEMICOLON  */
+#line 117 "./bake_pasr.y"
+                                  { (yyval.expr) = expr_copy(expr_ident(ctx_insert_ident((yyvsp[-3].string))), (yyvsp[-1].expr)); }
+#line 1650 "./src/bake_pasr.c"
     break;
 
-  case 24: /* IF_STMT: IF LPAREN CONDITION RPAREN LBRACE STMT_LIST_BEGIN RBRACE ELIF_LIST LBRACE STMT_LIST_BEGIN RBRACE  */
-#line 157 "./bake_pasr.y"
-                {
-			expr_t else_pack = expr_packv(ctx_pop_exprs());
-			expr_t elif_pack = expr_packv(ctx_pop_elifs());
-			expr_t if_pack = expr_packv(ctx_pop_exprs());
-			expr_t pack = expr_packi(4, (yyvsp[-8].expr), if_pack, elif_pack, else_pack);
-			(yyval.expr) = expr_if_elif_else_block(pack);
-		}
-#line 1681 "./src/bake_pasr.c"
-    break;
-
-  case 25: /* $@3: %empty  */
-#line 168 "./bake_pasr.y"
-                    { ctx_push_elifs(); }
-#line 1687 "./src/bake_pasr.c"
-    break;
-
-  case 26: /* ELIF_LIST: ELIF_LIST $@3 ELSE IF LPAREN CONDITION RPAREN LBRACE STMT_LIST_BEGIN RBRACE  */
-#line 169 "./bake_pasr.y"
-                {
-			expr_t elif_pack = expr_packv(ctx_pop_exprs());
-			expr_t pack = expr_packi(2, (yyvsp[-4].expr), elif_pack);
-			ctx_push_elif(pack);
-		}
-#line 1697 "./src/bake_pasr.c"
-    break;
-
-  case 27: /* ELIF_LIST: ELSE IF LPAREN CONDITION RPAREN LBRACE STMT_LIST_BEGIN RBRACE  */
-#line 175 "./bake_pasr.y"
-                {
-			expr_t elif_pack = expr_packv(ctx_pop_exprs());
-			expr_t pack = expr_packi(2, (yyvsp[-4].expr), elif_pack);
-			ctx_push_elif(pack);
-		}
-#line 1707 "./src/bake_pasr.c"
-    break;
-
-  case 28: /* VAR_STMT: IDENT EQUALS EXPR SEMICOLON  */
-#line 183 "./bake_pasr.y"
-                                      { (yyval.expr) = expr_copy(expr_ident(ctx_insert_ident((yyvsp[-3].string))), (yyvsp[-1].expr)); }
-#line 1713 "./src/bake_pasr.c"
-    break;
-
-  case 29: /* VAR_STMT: IDENT PEQ EXPR SEMICOLON  */
-#line 184 "./bake_pasr.y"
+  case 25: /* VAR_DECL: IDENT PEQ EXPR SEMICOLON  */
+#line 118 "./bake_pasr.y"
                                    { (yyval.expr) = expr_copy_add(expr_ident(ctx_validate_ident((yyvsp[-3].string))), (yyvsp[-1].expr)); }
-#line 1719 "./src/bake_pasr.c"
+#line 1656 "./src/bake_pasr.c"
     break;
 
-  case 30: /* VAR_STMT: IDENT QEQ STRING SEMICOLON  */
-#line 185 "./bake_pasr.y"
+  case 26: /* VAR_DECL: IDENT QEQ STRING SEMICOLON  */
+#line 119 "./bake_pasr.y"
                                      { (yyval.expr) = expr_copy_if(expr_ident(ctx_insert_ident((yyvsp[-3].string))), expr_string((yyvsp[-1].string))); }
-#line 1725 "./src/bake_pasr.c"
+#line 1662 "./src/bake_pasr.c"
     break;
 
-  case 31: /* CALL_STMT: MKDIR LPAREN EXPR RPAREN SEMICOLON  */
-#line 189 "./bake_pasr.y"
+  case 27: /* CALL_DECL: MKDIR LPAREN EXPR RPAREN SEMICOLON  */
+#line 123 "./bake_pasr.y"
                                              { (yyval.expr) = expr_mkdir((yyvsp[-2].expr)); }
-#line 1731 "./src/bake_pasr.c"
+#line 1668 "./src/bake_pasr.c"
     break;
 
-  case 32: /* CALL_STMT: MKFILE LPAREN EXPR RPAREN SEMICOLON  */
-#line 190 "./bake_pasr.y"
+  case 28: /* CALL_DECL: MKFILE LPAREN EXPR RPAREN SEMICOLON  */
+#line 124 "./bake_pasr.y"
                                               { (yyval.expr) = expr_mkfile((yyvsp[-2].expr)); }
-#line 1737 "./src/bake_pasr.c"
+#line 1674 "./src/bake_pasr.c"
     break;
 
-  case 33: /* CALL_STMT: RMDIR LPAREN EXPR RPAREN SEMICOLON  */
-#line 191 "./bake_pasr.y"
+  case 29: /* CALL_DECL: RMDIR LPAREN EXPR RPAREN SEMICOLON  */
+#line 125 "./bake_pasr.y"
                                              { (yyval.expr) = expr_rmdir((yyvsp[-2].expr)); }
-#line 1743 "./src/bake_pasr.c"
+#line 1680 "./src/bake_pasr.c"
     break;
 
-  case 34: /* CALL_STMT: RMFILE LPAREN EXPR RPAREN SEMICOLON  */
-#line 192 "./bake_pasr.y"
+  case 30: /* CALL_DECL: RMFILE LPAREN EXPR RPAREN SEMICOLON  */
+#line 126 "./bake_pasr.y"
                                               { (yyval.expr) = expr_rmfile((yyvsp[-2].expr)); }
-#line 1749 "./src/bake_pasr.c"
+#line 1686 "./src/bake_pasr.c"
     break;
 
-  case 35: /* CALL_STMT: PRINTF LPAREN EXPR RPAREN SEMICOLON  */
-#line 193 "./bake_pasr.y"
+  case 31: /* CALL_DECL: PRINTF LPAREN EXPR RPAREN SEMICOLON  */
+#line 127 "./bake_pasr.y"
                                               { (yyval.expr) = expr_printf((yyvsp[-2].expr)); }
-#line 1755 "./src/bake_pasr.c"
+#line 1692 "./src/bake_pasr.c"
     break;
 
-  case 36: /* CALL_STMT: SHELL LPAREN EXPR RPAREN SEMICOLON  */
-#line 194 "./bake_pasr.y"
+  case 32: /* CALL_DECL: SHELL LPAREN EXPR RPAREN SEMICOLON  */
+#line 128 "./bake_pasr.y"
                                              { (yyval.expr) = expr_shell((yyvsp[-2].expr)); }
-#line 1761 "./src/bake_pasr.c"
+#line 1698 "./src/bake_pasr.c"
     break;
 
-  case 37: /* EXPR: IDENT  */
-#line 198 "./bake_pasr.y"
+  case 33: /* EXPR: IDENT  */
+#line 132 "./bake_pasr.y"
                 { (yyval.expr) = expr_ident(ctx_validate_ident((yyvsp[0].string))); }
-#line 1767 "./src/bake_pasr.c"
+#line 1704 "./src/bake_pasr.c"
     break;
 
-  case 38: /* EXPR: STRING  */
-#line 199 "./bake_pasr.y"
+  case 34: /* EXPR: STRING  */
+#line 133 "./bake_pasr.y"
                  { (yyval.expr) = expr_string((yyvsp[0].string)); }
-#line 1773 "./src/bake_pasr.c"
+#line 1710 "./src/bake_pasr.c"
     break;
 
-  case 39: /* CONDITION: COMPARISON  */
-#line 203 "./bake_pasr.y"
-                     { (yyval.expr) = expr_cond((yyvsp[0].expr)); }
-#line 1779 "./src/bake_pasr.c"
+  case 35: /* COND: COMP  */
+#line 137 "./bake_pasr.y"
+               { (yyval.expr) = expr_cond((yyvsp[0].expr)); }
+#line 1716 "./src/bake_pasr.c"
     break;
 
-  case 40: /* COMPARISON: EXPR EQEQ EXPR  */
-#line 207 "./bake_pasr.y"
+  case 36: /* COMP: EXPR EQEQ EXPR  */
+#line 141 "./bake_pasr.y"
                          { (yyval.expr) = expr_comp((yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1785 "./src/bake_pasr.c"
+#line 1722 "./src/bake_pasr.c"
     break;
 
 
-#line 1789 "./src/bake_pasr.c"
+#line 1726 "./src/bake_pasr.c"
 
       default: break;
     }
@@ -2014,8 +1951,10 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 209 "./bake_pasr.y"
+#line 143 "./bake_pasr.y"
 
+
+#define LOG_FMT_BUFFER_SIZE (0x1000)
 
 char const* g_current_filename;
 int32_t g_line_number;
@@ -2023,12 +1962,11 @@ int32_t g_column_number;
 
 int32_t main(int32_t argc, char** argv)
 {
-	log_prologue();
 	heap_prologue();
 	g_current_filename = argv[1];
 	g_line_number = 1;
 	g_column_number = 1;
-	FILE* file = fopen(argv[1], "r"); // TODO: remove this..
+	FILE* file = fopen(argv[1], "r");
 	if (file)
 	{
 		ctx_alloc();
@@ -2048,17 +1986,18 @@ int32_t main(int32_t argc, char** argv)
 		fclose(file);
 	}
 	heap_epilogue();
-	log_printf("DONE\n"); // TODO
-	log_epilogue();
+	printf("DONE\n");
 	return 0;
 }
-int32_t yyerror(char const* msg, ...)
+int32_t yyerror(char const* fmt, ...)
 {
+	static char fmt_buffer[LOG_FMT_BUFFER_SIZE];
 	va_list args;
-	va_start(args, msg);
-	log_printf("%s:%d:%d: %s\n", g_current_filename, yylloc.first_line, yylloc.first_column, msg, args);
+	va_start(args, fmt);
+	vsnprintf(fmt_buffer, LOG_FMT_BUFFER_SIZE, fmt, args);
+	printf("%s:%d:%d: %s\n", g_current_filename, yylloc.first_line, yylloc.first_column, fmt_buffer);
 	va_end(args);
-	return 0;
+	return 1;
 }
 int32_t yywrap(void)
 {

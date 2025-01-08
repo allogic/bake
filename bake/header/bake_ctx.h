@@ -6,7 +6,6 @@
 #include "core_str.h"
 #include "core_vec.h"
 
-#include "bake_config.h"
 #include "bake_expr.h"
 
 extern void ctx_push_exprs(void);
@@ -27,7 +26,7 @@ extern void ctx_remove_ident(str_t ident);
 extern str_t ctx_validate_ident(str_t ident);
 extern void ctx_insert_var(str_t ident, str_t value);
 extern str_t* ctx_get_var(str_t ident);
-extern void ctx_build(char const* target_name);
+extern void ctx_build(char const* rule_name);
 extern void ctx_print(void);
 extern void ctx_free(void);
 
